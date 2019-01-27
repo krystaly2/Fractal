@@ -6,9 +6,12 @@
  */
 
 #include <iostream>
+#include "include/BitmapFileHeader.h"
+#include "include/BitmapInfoHeader.h"
+
 using namespace std;
 
-int main(){
+int main() {
 	cout << "hi girls morning" << endl;
 }
 
