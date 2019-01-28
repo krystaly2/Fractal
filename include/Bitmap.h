@@ -11,6 +11,8 @@
 #include <string>
 #include <cstdint>
 #include <memory>
+#include "../include/BitmapFileHeader.h"
+#include "../include/BitmapInfoHeader.h"
 
 using namespace std;
 
@@ -20,7 +22,8 @@ class Bitmap {
 private:
 	int m_width{0};
 	int m_height{0};
-	unique_ptr<uint8_t[]> m_pPixel{nullptr};
+	unique_ptr<uint8_t[]> m_pPixels{nullptr}; // unique_ptr don't need delete
+	int pixelsSize; // total number of r, g, b in bitmap
 
 public:
 	Bitmap(int width, int height);
