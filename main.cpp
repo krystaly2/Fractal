@@ -12,7 +12,10 @@
 
 
 #include <iostream>
+#include <climits>
+#include <algorithm>
 #include "include/Bitmap.h"
+#include "include/Mandelbrot.h"
 
 using namespace std;
 using namespace caveOfProgramming;
@@ -23,12 +26,22 @@ int main() {
 
 	Bitmap bitmap(WIDTH,HEIGHT);
 
+	double minV = 255;
+	double maxV = 0;
+
 	for(int x = 0; x < WIDTH; ++x) {
 		for(int y = 0; y < HEIGHT; ++y){
-			bitmap.setPixel(x, y, 255, 0, 0);
+			double xFractal = (x - WIDTH/2)*2.0/WIDTH;
+			double yFractal = (y - HEIGHT/2)*2.0/HEIGHT;
+
+			int iterations = Mandelbrot::getIterations(xFractal, yFractal);
+
+			uint8_t red = (uint8_t)(256*(double)iterations/Mandelbrot::MAX_ITERATIONS);
+			bitmap.setPixel(x, y, red, red, red);
 		}
 	}
-//	bitmap.setPixel(WIDTH/2, HEIGHT/2, 255, 255, 255);
+
+//	cout << minV << " " << maxV << endl;
 	bitmap.write("test.bmp");
 
 
