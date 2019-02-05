@@ -16,6 +16,8 @@
 #include <math.h>
 #include "include/Bitmap.h"
 #include "include/Mandelbrot.h"
+#include "include/ZoomList.h"
+
 
 using namespace std;
 using namespace caveOfProgramming;
@@ -25,6 +27,9 @@ int main() {
 	int const HEIGHT = 600;
 
 	Bitmap bitmap(WIDTH, HEIGHT);
+
+	ZoomList zoomList(WIDTH, HEIGHT);
+	zoomList.add(Zoom(WIDTH/2, HEIGHT/2, 4.0/WIDTH));
 
 	// histogram: counts the number of pixels with each iteration
 	// iterations as index, range from 0 to MAX_ITERATIONS-1
@@ -36,10 +41,8 @@ int main() {
 	// fill up histogram and fractal
 	for (int x = 0; x < WIDTH; ++x) {
 		for (int y = 0; y < HEIGHT; ++y) {
-			double xFractal = (x - WIDTH / 2 - 200) * 2.0 / HEIGHT; // 200 is to shift the image to the right
-			double yFractal = (y - HEIGHT / 2) * 2.0 / HEIGHT; // scaling factor is the same: 2.0/HEIGHT
-
-			int iterations = Mandelbrot::getIterations(xFractal, yFractal);
+			pair<double,double> coords = zoomList.doZoom(x,y);
+			int iterations = Mandelbrot::getIterations(coords.first, coords.second);
 			if (iterations != Mandelbrot::MAX_ITERATIONS)
 				histogram[iterations]++;
 			fractal[y * WIDTH + x] = iterations;
