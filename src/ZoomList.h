@@ -10,7 +10,7 @@
 
 #include <vector>
 #include <utility> // for pair
-#include "../include/Zoom.h"
+#include "Zoom.h"
 
 using namespace std;
 
@@ -20,22 +20,24 @@ class ZoomList {
 private:
 	double m_xCenter{0};
 	double m_yCenter{0};
-	double m_scale{1};
+	double m_scale{1.0};
 
 	int m_width{0};
 	int m_height{0};
 
 	vector<Zoom> zooms;
 public:
+	ZoomList();
 	ZoomList(int width, int height);
 
-	// add zoom to current zooms
+	// zoom in based on current zoom level
 	// reset coordinate m_xCenter, m_yCenter and m_scale
 	void add(const Zoom& zoom);
 
 	// convert (x,y) from bitmap location to coordinate location based on current zoom
 	// bitmap location x ranges from 0 to WIDTH and y ranges from 0 to HEIGHT
-	// coordinate location x ranges from -WIDTH/2 to WIDTH/2 and y ranges from -HEIGHT/2 to HEIGHT/2
+	// coordinate location x ranges from -WIDTH/2*scale + m_xCenter to WIDTH/2*scale + m_xCenter
+	// and y ranges similarly but based on HEIGHT and m_yCenter
 	pair<double, double> doZoom(int x, int y);
 };
 

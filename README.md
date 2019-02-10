@@ -24,3 +24,9 @@ stops here, doesn't blow up!
 For a Mandelbrot image, we need to color the blow up region with one color, then the non-blow-up region with another color.
 
 
+# Lessons Learnt
+- unique pointer: deallocate memory automatically
+
+
+# To do
+use profiler

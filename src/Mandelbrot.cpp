@@ -5,7 +5,7 @@
  *      Author: krystal.yang
  */
 #include <complex>
-#include "../include/Mandelbrot.h"
+#include "Mandelbrot.h"
 
 using namespace std;
 
