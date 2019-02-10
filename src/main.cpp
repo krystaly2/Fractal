@@ -10,15 +10,7 @@
  *  ctrl+shift+f autoformat
  */
 
-#include <iostream>
-#include <climits>
-#include <algorithm>
-#include <math.h>
-#include "Bitmap.h"
-#include "Mandelbrot.h"
-#include "ZoomList.h"
 #include "FractalCreator.h"
-
 
 using namespace std;
 using namespace caveOfProgramming;
@@ -28,13 +20,15 @@ int main() {
 	const int HEIGHT = 600;
 	FractalCreator fractalCreator(WIDTH, HEIGHT);
 
-	fractalCreator.addZoom(295, HEIGHT-202, 0.1);
-	fractalCreator.addZoom(312, HEIGHT-202, 0.1);
+	fractalCreator.addRange(0.0, RGB(0, 0, 0));
+	fractalCreator.addRange(0.3, RGB(255, 0, 0));
+	fractalCreator.addRange(0.5, RGB(255, 255, 0));
+	fractalCreator.addRange(1.0, RGB(255, 255, 255));
 
-	string fileName = "test.bmp";
-	fractalCreator.setBitmapName(fileName);
-	fractalCreator.drawBitmap();
+	fractalCreator.addZoom(295, HEIGHT - 202, 0.1);
+	fractalCreator.addZoom(312, HEIGHT - 304, 0.1);
 
+	fractalCreator.run("test.bmp");
 
 	cout << "hi girls morning" << endl;
 }
