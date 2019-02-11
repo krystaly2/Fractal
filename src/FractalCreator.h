@@ -11,13 +11,11 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
-//#include <math.h>
 #include <vector>
 #include "Bitmap.h"
 #include "Mandelbrot.h"
 #include "ZoomList.h"
 #include "RGB.h"
-
 
 using namespace std;
 
@@ -30,10 +28,11 @@ private:
 	int total { 0 }; // total: number of pixels with iterations from 0 to MAX_ITERATIONS-1
 	Bitmap bitmap;
 	ZoomList zoomList;
-	vector<int> ranges;
-	vector<int> rangeTotals;
+
+	vector<int> ranges; // range of iterations
+	vector<int> rangeTotals; // total number of pixels in each range
 	vector<RGB> colors;
-	bool bGotFirstRange{false};
+	bool bGotFirstRange { false };
 
 	// histogram: counts the number of pixels with each iteration
 	// iterations as index, range from 0 to MAX_ITERATIONS-1
@@ -41,7 +40,6 @@ private:
 
 	// fractal: stores number of iterations for each pixel
 	unique_ptr<int[]> fractal;
-
 
 	// calcualte number of iterations each (x,y) coordinate takes
 	// fill up histogram and fractal
@@ -54,6 +52,8 @@ private:
 
 	void writeBitmap(string name);
 
+	// use the number of iterations to determine which range does it fall into
+	int getRange(int iterations) const; // const here indicates this function won't modify anything class members
 
 public:
 	FractalCreator(int width, int height);
@@ -61,8 +61,7 @@ public:
 	void run(string name);
 	void addRange(double rangeEnd, const RGB& rgb);
 	void addZoom(const int zoomWidth, const int zoomHeight,
-						const double zoomScale);
-
+			const double zoomScale);
 };
 
 } /* namespace caveOfProgramming */

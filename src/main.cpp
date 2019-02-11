@@ -20,9 +20,10 @@ int main() {
 	const int HEIGHT = 600;
 	FractalCreator fractalCreator(WIDTH, HEIGHT);
 
-	fractalCreator.addRange(0.0, RGB(0, 0, 0));
-	fractalCreator.addRange(0.3, RGB(255, 0, 0));
-	fractalCreator.addRange(0.5, RGB(255, 255, 0));
+	// below specifies 3 ranges: 0.0 to 0.3, 0.3 to 0.5, and 0.5 to 1.0
+	fractalCreator.addRange(0.0, RGB(0, 0, 255));
+	fractalCreator.addRange(0.05, RGB(255, 99, 71));
+	fractalCreator.addRange(0.08, RGB(255, 215, 0));
 	fractalCreator.addRange(1.0, RGB(255, 255, 255));
 
 	fractalCreator.addZoom(295, HEIGHT - 202, 0.1);
