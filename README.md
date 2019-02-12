@@ -29,6 +29,4 @@ For a Mandelbrot image, we need to color the blow up region with one color, then
 
 
 # To do
-use profiler to speed up the program
-click on a region and zoom in
-use valgrind to detect memory leaks
+check out: https://github.com/ArashPartow/bitmap
